@@ -1,25 +1,55 @@
 import React, { useState, useEffect, useRef } from 'react';
 import confetti from 'canvas-confetti';
 import { birthdayAudio } from './utils/birthdayAudio';
-import { Music, VolumeX, Sparkles, RotateCcw, FastForward, Heart, Gift, MessageCircleHeart } from 'lucide-react';
+import { Music, VolumeX, Sparkles } from 'lucide-react';
+import { BirthdayCakeFlow } from './components/BirthdayCakeFlow';
+
+export interface BirthdayPhoto {
+  id: string;
+  src: string;
+  title: string;
+  subtitle: string;
+}
+
+export const birthdayPhotos: BirthdayPhoto[] = [
+  {
+    id: 'photo-1',
+    src: '/images/photo1.jpg',
+    title: 'Serene Riverbank',
+    subtitle: 'Graceful in purple with traditional white bangles',
+  },
+  {
+    id: 'photo-2',
+    src: '/images/photo2.jpg',
+    title: 'Festive Splendor',
+    subtitle: 'Classic orange saree with fresh floral jewelry',
+  },
+  {
+    id: 'photo-3',
+    src: '/images/photo3.jpg',
+    title: 'Golden Mustard Bloom',
+    subtitle: 'Radiant smile among blooming yellow flowers',
+  },
+  {
+    id: 'photo-4',
+    src: '/images/photo4.jpg',
+    title: 'Monochrome Elegance',
+    subtitle: 'Timeless style in printed saree & lace sleeves',
+  },
+];
 
 export default function App() {
   const [isMailOpen, setIsMailOpen] = useState(false);
   const [isCardFoldedOpen, setIsCardFoldedOpen] = useState(false);
-  const [activeTab, setActiveTab] = useState<'card' | 'letter'>('card');
   const [isPlayingMusic, setIsPlayingMusic] = useState(false);
-  const [instantReveal, setInstantReveal] = useState(false);
+  const [activePhotoIndex, setActivePhotoIndex] = useState(0);
+  const [isCakeFlowOpen, setIsCakeFlowOpen] = useState(false);
 
   // Customization state (defaults to Mehwish exactly as requested)
-  const [recipientName, setRecipientName] = useState('Mehwish');
-  const [birthDate, setBirthDate] = useState('27 May');
+  const [recipientName] = useState('Mehwish');
+  const [birthDate] = useState('27 May');
   const [displayedDate, setDisplayedDate] = useState('');
   const [dateCompleted, setDateCompleted] = useState(false);
-
-  // Letter typewriter state
-  const [letterText, setLetterText] = useState('');
-  const fullLetterMessage =
-    'My love. You are a very special girl. I always silently thank you for coming into my life. Today, I wish you all the best, lots of health, and lots of joy. I always hope we will celebrate many more birthdays like this together. Happy birthday to you.💕';
 
   const typingTimerRef = useRef<number | null>(null);
 
@@ -46,12 +76,6 @@ export default function App() {
 
   // Date typing effect matching original script
   useEffect(() => {
-    if (instantReveal) {
-      setDisplayedDate(birthDate);
-      setDateCompleted(true);
-      return;
-    }
-
     setDisplayedDate('');
     setDateCompleted(false);
 
@@ -78,25 +102,7 @@ export default function App() {
       clearTimeout(startDelay);
       if (typingTimerRef.current) clearInterval(typingTimerRef.current);
     };
-  }, [birthDate, instantReveal]);
-
-  // Letter typewriter effect when opening the letter tab
-  useEffect(() => {
-    if (isMailOpen && activeTab === 'letter') {
-      setLetterText('');
-      let i = 0;
-      const interval = setInterval(() => {
-        if (i < fullLetterMessage.length) {
-          setLetterText(fullLetterMessage.slice(0, i + 1));
-          i++;
-        } else {
-          clearInterval(interval);
-        }
-      }, 40);
-
-      return () => clearInterval(interval);
-    }
-  }, [isMailOpen, activeTab]);
+  }, [birthDate]);
 
   const handleOpenMail = () => {
     setIsMailOpen(true);
@@ -118,15 +124,6 @@ export default function App() {
     setIsPlayingMusic(state);
   };
 
-  const toggleInstantReveal = () => {
-    setInstantReveal((prev) => !prev);
-    if (!instantReveal) {
-      setDisplayedDate(birthDate);
-      setDateCompleted(true);
-      triggerConfetti();
-    }
-  };
-
   const onHatClick = () => {
     birthdayAudio.playPop();
     confetti({
@@ -146,7 +143,7 @@ export default function App() {
   };
 
   return (
-    <div id="wrapper" className={instantReveal ? 'instant-reveal' : ''}>
+    <div id="wrapper">
       {/* Top Floating Control Bar */}
       <div className="fixed top-3 right-4 z-50 flex items-center gap-2">
         <button
@@ -164,25 +161,6 @@ export default function App() {
             <>
               <Music className="w-4 h-4 text-pink-500" />
               <span>Play Tune</span>
-            </>
-          )}
-        </button>
-
-        <button
-          id="btn_instant_reveal"
-          onClick={toggleInstantReveal}
-          className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-white/90 hover:bg-white text-gray-800 border-2 border-gray-800 shadow-sm transition hover:scale-105 active:scale-95 cursor-pointer"
-          title={instantReveal ? 'Reset animation timings' : 'Skip animation delays'}
-        >
-          {instantReveal ? (
-            <>
-              <RotateCcw className="w-3.5 h-3.5 text-blue-500" />
-              <span>Reset Intro</span>
-            </>
-          ) : (
-            <>
-              <FastForward className="w-3.5 h-3.5 text-amber-500" />
-              <span>Skip Wait</span>
             </>
           )}
         </button>
@@ -270,10 +248,36 @@ export default function App() {
           <div className="box__account">
             <div
               className="image"
-              onClick={triggerConfetti}
-              title={`Click ${recipientName}'s photo for confetti!`}
+              onClick={() => {
+                setActivePhotoIndex((prev) => (prev + 1) % birthdayPhotos.length);
+                birthdayAudio.playPop();
+                triggerConfetti();
+              }}
+              title={`Click to view next photo (${activePhotoIndex + 1}/4: ${birthdayPhotos[activePhotoIndex].title})`}
             >
-              <img src="/images/unnamed.png" alt={recipientName} />
+              <img
+                src={birthdayPhotos[activePhotoIndex].src}
+                alt={`${recipientName} - ${birthdayPhotos[activePhotoIndex].title}`}
+                referrerPolicy="no-referrer"
+              />
+            </div>
+
+            {/* 4-Photo Switcher Dots */}
+            <div className="photo-indicators">
+              {birthdayPhotos.map((photo, idx) => (
+                <button
+                  key={photo.id}
+                  className={`photo-dot-btn ${activePhotoIndex === idx ? 'active' : ''}`}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setActivePhotoIndex(idx);
+                    birthdayAudio.playChime(520 + idx * 80, 0.15);
+                  }}
+                  title={`Photo ${idx + 1}: ${photo.title}`}
+                  aria-label={`Show photo ${idx + 1}`}
+                />
+              ))}
+              <span className="photo-badge-label">{activePhotoIndex + 1}/4</span>
             </div>
 
             <div className="name">
@@ -386,104 +390,96 @@ export default function App() {
           tabIndex={0}
         ></i>
 
-        {/* Modal Tabs: 3D Birthday Card vs Typed Love Letter */}
-        <div className="letter-modal-tabs">
+        {/* 'Cake' Option Button beside the Wish Card as requested */}
+        <div className="cake-modal-top-bar">
           <button
-            className={`letter-modal-tab-btn ${activeTab === 'card' ? 'active' : ''}`}
+            id="btn_cake_option"
             onClick={() => {
-              setActiveTab('card');
-              birthdayAudio.playChime(660, 0.2);
+              birthdayAudio.playPop();
+              setIsCakeFlowOpen(true);
             }}
+            className="cake-option-pill-btn"
+            title="Click to blow candle & cut birthday cake!"
           >
-            <Gift className="w-3.5 h-3.5 inline mr-1" />
-            3D Birthday Card
-          </button>
-          <button
-            className={`letter-modal-tab-btn ${activeTab === 'letter' ? 'active' : ''}`}
-            onClick={() => {
-              setActiveTab('letter');
-              birthdayAudio.playChime(770, 0.2);
-            }}
-          >
-            <MessageCircleHeart className="w-3.5 h-3.5 inline mr-1" />
-            Special Note 💕
+            <span className="text-xl">🎂</span>
+            <span>Cake (কেক কাটুন)</span>
+            <Sparkles className="w-4 h-4 text-amber-300 animate-spin" />
           </button>
         </div>
 
-        {activeTab === 'card' ? (
-          /* 3D Folding Card Container */
-          <div
-            className={`boxMail-container ${isCardFoldedOpen ? 'opened' : ''}`}
-            onClick={() => setIsCardFoldedOpen((prev) => !prev)}
-            title="Hover or tap to unfold card"
-          >
-            {/* Card 1: Front Cover that swings open */}
-            <div className="card1">
-              <div className="userImg">
-                <img src="/images/unnamed.png" alt={recipientName} />
-              </div>
-              <h4 className="username">
-                To: {recipientName} 💖<span className="underline"></span>
-              </h4>
+        {/* 3D Folding Card Container */}
+        <div
+          className={`boxMail-container ${isCardFoldedOpen ? 'opened' : ''}`}
+          onClick={() => setIsCardFoldedOpen((prev) => !prev)}
+          title="Hover or tap to unfold card"
+        >
+          {/* Card 1: Front Cover that swings open */}
+          <div className="card1">
+            <div className="userImg">
+              <img
+                src={birthdayPhotos[activePhotoIndex].src}
+                alt={recipientName}
+                referrerPolicy="no-referrer"
+              />
+            </div>
+            <h4 className="username">
+              To: {recipientName} 💖<span className="underline"></span>
+            </h4>
 
-              <h3>Happy Birthday</h3>
+            <h3>Happy Birthday</h3>
 
-              <div className="imageCute">
-                <img src="/cute1.png" alt="Birthday Cake" />
-              </div>
-
-              <div className="tap-hint">
-                <span>{isCardFoldedOpen ? '✨ Unfolded' : '👈 Hover or Tap to Open'}</span>
+            {/* Photo 3 embedded in front card frame */}
+            <div className="imageCute">
+              <div className="card-mini-photo-frame" title={birthdayPhotos[2].title}>
+                <img
+                  src={birthdayPhotos[2].src}
+                  alt={birthdayPhotos[2].title}
+                  referrerPolicy="no-referrer"
+                />
               </div>
             </div>
 
-            {/* Card 2: Inner Heartfelt Note */}
-            <div className="card2">
-              <div className="card2-content">
-                <h3>To You!</h3>
-                <h2>
-                  Happy birthday 🥳🎂🥳 chanda the day you come into my life I was not
-                  really much attached to you but day by day you became close to my heart.
-                  And now you are truly my younger sister. I wish I could remove some of
-                  the pain from your life which you are bearing alone. But you're always
-                  welcome 🤗 you can talk anytime you want to talk specially those which
-                  you can't say to others. And this year your all dreams come true. I wish
-                  that your brother could wish you but if couldn't wish on him behalf I am
-                  wishing you happy birthday 🎈🎂🎈 sana. Don't be Sad ok be happy 😌
-                </h2>
+            <div className="tap-hint">
+              <span>{isCardFoldedOpen ? '✨ Unfolded' : '👈 Hover or Tap to Open'}</span>
+            </div>
+          </div>
 
-                <div className="imageCute2">
-                  <img src="/cute2.png" alt="Cute Bunny" />
+          {/* Card 2: Inner Heartfelt Note */}
+          <div className="card2">
+            <div className="card2-content">
+              <h3>To You!</h3>
+              <h2>
+                Happy birthday 🥳🎂🥳 chanda the day you come into my life I was not
+                really much attached to you but day by day you became close to my heart.
+                And now you are truly my younger sister. I wish I could remove some of
+                the pain from your life which you are bearing alone. But you're always
+                welcome 🤗 you can talk anytime you want to talk specially those which
+                you can't say to others. And this year your all dreams come true. I wish
+                that your brother could wish you but if couldn't wish on him behalf I am
+                wishing you happy birthday 🎈🎂🎈 sana. Don't be Sad ok be happy 😌
+              </h2>
+
+              {/* Photo 4 embedded in inside card frame */}
+              <div className="imageCute2">
+                <div className="card-mini-photo-frame" title={birthdayPhotos[3].title}>
+                  <img
+                    src={birthdayPhotos[3].src}
+                    alt={birthdayPhotos[3].title}
+                    referrerPolicy="no-referrer"
+                  />
                 </div>
               </div>
             </div>
           </div>
-        ) : (
-          /* Handwritten Typed Letter View */
-          <div className="handwritten-letter-card">
-            <div className="flex justify-center items-center gap-2 mb-2">
-              <Heart className="w-6 h-6 text-pink-500 fill-pink-500 animate-pulse" />
-              <h3>To You, {recipientName}</h3>
-              <Heart className="w-6 h-6 text-pink-500 fill-pink-500 animate-pulse" />
-            </div>
-            <p>
-              {letterText}
-              <span className="inline-block w-2 h-5 ml-1 bg-pink-500 animate-pulse align-middle"></span>
-            </p>
-            <div className="mt-6 pt-4 border-t border-amber-200 flex justify-between items-center text-sm font-sans text-gray-600">
-              <span className="font-dancing text-lg text-pink-600 font-bold">
-                With all love & best wishes ✨
-              </span>
-              <button
-                onClick={triggerConfetti}
-                className="px-4 py-1.5 rounded-full bg-pink-500 text-white font-medium hover:bg-pink-600 transition flex items-center gap-1 cursor-pointer"
-              >
-                <Sparkles className="w-4 h-4" /> Send Love
-              </button>
-            </div>
-          </div>
-        )}
+        </div>
       </div>
+
+      {/* Interactive Birthday Cake Cutting & Wishlist Flow Modal */}
+      <BirthdayCakeFlow
+        isOpen={isCakeFlowOpen}
+        onClose={() => setIsCakeFlowOpen(false)}
+        recipientName={recipientName}
+      />
 
       {/* Footer attribution watermark matching original */}
       <footer id="copy" className="text-center py-2 text-xs text-gray-500 pointer-events-none">
