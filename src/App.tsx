@@ -45,8 +45,8 @@ export default function App() {
   const [activePhotoIndex, setActivePhotoIndex] = useState(0);
   const [isCakeFlowOpen, setIsCakeFlowOpen] = useState(false);
 
-  // Customization state (defaults to Mehwish exactly as requested)
-  const [recipientName] = useState('Mehwish');
+  // Customization state (defaults to Ripa as requested)
+  const [recipientName] = useState('Ripa');
   const [birthDate] = useState('27 May');
   const [displayedDate, setDisplayedDate] = useState('');
   const [dateCompleted, setDateCompleted] = useState(false);
@@ -449,14 +449,13 @@ export default function App() {
             <div className="card2-content">
               <h3>To You!</h3>
               <h2>
-                Happy birthday 🥳🎂🥳 chanda the day you come into my life I was not
-                really much attached to you but day by day you became close to my heart.
-                And now you are truly my younger sister. I wish I could remove some of
-                the pain from your life which you are bearing alone. But you're always
-                welcome 🤗 you can talk anytime you want to talk specially those which
-                you can't say to others. And this year your all dreams come true. I wish
-                that your brother could wish you but if couldn't wish on him behalf I am
-                wishing you happy birthday 🎈🎂🎈 sana. Don't be Sad ok be happy 😌
+                Happy Birthday 🥳🎂🥳 Ripa! The day you came into my life I was not
+                really much attached to you, but day by day you became so close to my heart.
+                And now you are truly my dearest younger sister. I wish I could remove all
+                the pain from your life which you are bearing alone. You are always welcome 🤗
+                you can talk anytime you want to talk, especially those thoughts which you can't say
+                to others. May this year all your dreams come true! Wishing you a very Happy Birthday
+                🎈🎂🎈 Ripa. Don't be sad, always be happy and stay blessed! 😌💖
               </h2>
 
               {/* Photo 4 embedded in inside card frame */}

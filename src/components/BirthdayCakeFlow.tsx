@@ -674,7 +674,7 @@ export const BirthdayCakeFlow: React.FC<BirthdayCakeFlowProps> = ({
               </div>
 
               <p className="text-xs text-gray-600 mb-6 leading-relaxed">
-                ধন্যবাদ মেহউইশ! তোমার এই বিশেষ জন্মদিনে তোমার সব স্বপ্ন ও ইচ্ছা পূরণ হোক।
+                ধন্যবাদ {recipientName}! তোমার এই বিশেষ জন্মদিনে তোমার সব স্বপ্ন ও ইচ্ছা পূরণ হোক।
                 খুব শীঘ্রই তোমার সব উপহার তোমার হাতে পৌঁছে যাবে! 🎂✨
               </p>
 

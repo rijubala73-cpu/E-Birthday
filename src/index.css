@@ -804,10 +804,12 @@ html, body {
 
 .boxMail .boxMail-container .card2 h2 {
   font-family: 'Dancing Script', cursive;
-  font-size: 20px;
-  line-height: 1.6;
+  font-size: 25px;
+  font-weight: 600;
+  line-height: 1.65;
+  letter-spacing: 0.3px;
   color: #ffffff;
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.25);
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
   opacity: 0.3;
   transition: opacity 0.8s ease 0.3s;
 }
@@ -1037,8 +1039,9 @@ html, body {
   }
 
   .boxMail .boxMail-container .card2 h2 {
-    font-size: 15px;
-    line-height: 1.4;
+    font-size: 19px;
+    font-weight: 600;
+    line-height: 1.5;
   }
 }
 
