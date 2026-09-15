@@ -14,7 +14,7 @@ export interface BirthdayPhoto {
 export const birthdayPhotos: BirthdayPhoto[] = [
   {
     id: 'photo-1',
-    src: '/images/photo1.jpg',
+    src: 'photo1.jpg',
     title: 'Serene Riverbank',
     subtitle: 'Graceful in purple with traditional white bangles',
   },
