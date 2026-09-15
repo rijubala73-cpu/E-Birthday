@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 160" width="100" height="160">
+  <defs>
+    <radialGradient id="balloonPink" cx="35%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#FFB3BA"/>
+      <stop offset="60%" stop-color="#FF7882"/>
+      <stop offset="100%" stop-color="#D6334A"/>
+    </radialGradient>
+  </defs>
+  <!-- Balloon Body -->
+  <path d="M 50,15 C 80,15 95,45 92,75 C 88,105 60,118 53,124 L 54,128 L 46,128 L 47,124 C 40,118 12,105 8,75 C 5,45 20,15 50,15 Z" fill="url(#balloonPink)" stroke="#333" stroke-width="3"/>
+  <!-- Balloon knot -->
+  <polygon points="44,127 56,127 50,133" fill="#D6334A" stroke="#333" stroke-width="2"/>
+  <!-- Highlight shine -->
+  <ellipse cx="32" cy="40" rx="10" ry="20" transform="rotate(-25, 32, 40)" fill="#FFF" opacity="0.6"/>
+  <!-- String / Ribbon -->
+  <path d="M 50,133 Q 40,145 55,152 Q 45,158 50,160" fill="none" stroke="#666" stroke-width="2" stroke-linecap="round"/>
+</svg>

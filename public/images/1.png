@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 350 140" width="350" height="140">
+  <defs>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="2" dy="3" stdDeviation="2" flood-color="#333" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  <!-- Garland String -->
+  <path d="M 0,20 Q 80,60 175,35 Q 260,10 350,30" fill="none" stroke="#666" stroke-width="2.5" stroke-dasharray="4,4"/>
+  <!-- Flags -->
+  <!-- Flag 1 Pink -->
+  <polygon points="15,28 55,34 35,90" fill="#FF7882" stroke="#333" stroke-width="2" filter="url(#shadow)"/>
+  <circle cx="35" cy="55" r="5" fill="#FFF"/>
+  
+  <!-- Flag 2 Yellow -->
+  <polygon points="65,37 105,42 85,100" fill="#FFD166" stroke="#333" stroke-width="2" filter="url(#shadow)"/>
+  <path d="M 75,55 L 95,55 M 85,47 L 85,65" stroke="#FFF" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- Flag 3 Mint/Cyan -->
+  <polygon points="115,41 155,39 135,105" fill="#06D6A0" stroke="#333" stroke-width="2" filter="url(#shadow)"/>
+  <circle cx="135" cy="65" r="6" fill="#FFF"/>
+
+  <!-- Flag 4 Purple/Violet -->
+  <polygon points="168,36 208,28 188,96" fill="#B185DB" stroke="#333" stroke-width="2" filter="url(#shadow)"/>
+  <polygon points="188,48 193,58 183,58" fill="#FFF"/>
+
+  <!-- Flag 5 Coral/Orange -->
+  <polygon points="220,26 260,20 240,88" fill="#FF9F1C" stroke="#333" stroke-width="2" filter="url(#shadow)"/>
+  <circle cx="240" cy="50" r="5" fill="#FFF"/>
+
+  <!-- Flag 6 Blue -->
+  <polygon points="275,20 315,24 295,92" fill="#4EA8DE" stroke="#333" stroke-width="2" filter="url(#shadow)"/>
+  <circle cx="295" cy="50" r="5" fill="#FFF"/>
+
+  <!-- Hanging bows/ribbons -->
+  <circle cx="35" cy="30" r="4" fill="#333"/>
+  <circle cx="85" cy="39" r="4" fill="#333"/>
+  <circle cx="135" cy="40" r="4" fill="#333"/>
+  <circle cx="188" cy="32" r="4" fill="#333"/>
+  <circle cx="240" cy="23" r="4" fill="#333"/>
+  <circle cx="295" cy="22" r="4" fill="#333"/>
+</svg>

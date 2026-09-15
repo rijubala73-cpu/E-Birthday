@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 180" width="160" height="180">
+  <defs>
+    <!-- Pattern for striped hat -->
+    <clipPath id="hatCone">
+      <polygon points="80,25 20,165 140,165" />
+    </clipPath>
+  </defs>
+  
+  <!-- Hat Cone Base -->
+  <polygon points="80,25 20,165 140,165" fill="#FFD166" stroke="#333" stroke-width="4" stroke-linejoin="round"/>
+  
+  <!-- Stripes inside cone -->
+  <g clip-path="url(#hatCone)">
+    <path d="M-10,40 L180,80 L180,105 L-10,65 Z" fill="#FF7882"/>
+    <path d="M-10,85 L180,125 L180,150 L-10,110 Z" fill="#4EA8DE"/>
+    <path d="M-10,130 L180,170 L180,195 L-10,155 Z" fill="#06D6A0"/>
+    
+    <!-- Polka dots -->
+    <circle cx="80" cy="72" r="5" fill="#FFF"/>
+    <circle cx="60" cy="115" r="6" fill="#FFF"/>
+    <circle cx="105" cy="120" r="5" fill="#FFF"/>
+    <circle cx="45" cy="155" r="4" fill="#FFF"/>
+    <circle cx="120" cy="155" r="4" fill="#FFF"/>
+    <circle cx="85" cy="152" r="6" fill="#FFF"/>
+  </g>
+  
+  <!-- Hat outline again for clean borders -->
+  <polygon points="80,25 20,165 140,165" fill="none" stroke="#333" stroke-width="4" stroke-linejoin="round"/>
+  
+  <!-- Fluffy bottom fringe / pompoms -->
+  <g fill="#FF7882" stroke="#333" stroke-width="2.5">
+    <circle cx="22" cy="165" r="9"/>
+    <circle cx="38" cy="165" r="9" fill="#FFF"/>
+    <circle cx="55" cy="165" r="9"/>
+    <circle cx="72" cy="165" r="9" fill="#FFD166"/>
+    <circle cx="89" cy="165" r="9"/>
+    <circle cx="106" cy="165" r="9" fill="#FFF"/>
+    <circle cx="123" cy="165" r="9"/>
+    <circle cx="138" cy="165" r="9" fill="#4EA8DE"/>
+  </g>
+  
+  <!-- Big Top Pom-Pom -->
+  <g stroke="#333" stroke-width="3">
+    <circle cx="80" cy="20" r="16" fill="#FF7882"/>
+    <circle cx="73" cy="15" r="8" fill="#FFD166"/>
+    <circle cx="87" cy="16" r="8" fill="#4EA8DE"/>
+    <circle cx="80" cy="26" r="7" fill="#FFF"/>
+  </g>
+  <path d="M 68,10 Q 80,0 92,10" stroke="#FF7882" stroke-width="3" fill="none"/>
+</svg>

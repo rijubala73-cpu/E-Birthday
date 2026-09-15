@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFE4E6"/>
+      <stop offset="50%" stop-color="#FED7AA"/>
+      <stop offset="100%" stop-color="#FCE7F3"/>
+    </linearGradient>
+    <linearGradient id="hairGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2D1810"/>
+      <stop offset="100%" stop-color="#1A0D08"/>
+    </linearGradient>
+    <linearGradient id="dressGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FF7882"/>
+      <stop offset="100%" stop-color="#E11D48"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background Circle with Soft Sparkles -->
+  <rect width="400" height="400" fill="url(#bgGrad)"/>
+  <circle cx="90" cy="80" r="14" fill="#FFF" opacity="0.6"/>
+  <circle cx="320" cy="110" r="18" fill="#FFF" opacity="0.5"/>
+  <polygon points="70,180 75,195 90,200 75,205 70,220 65,205 50,200 65,195" fill="#FFD166" opacity="0.8"/>
+  <polygon points="340,240 344,252 356,256 344,260 340,272 336,260 324,256 336,252" fill="#FFD166" opacity="0.8"/>
+
+  <!-- Back Hair (Flowing Long Hair) -->
+  <path d="M 120,160 C 90,200 80,300 95,370 C 110,385 130,375 140,350 C 130,270 140,210 160,190 Z" fill="url(#hairGrad)"/>
+  <path d="M 280,160 C 310,200 320,300 305,370 C 290,385 270,375 260,350 C 270,270 260,210 240,190 Z" fill="url(#hairGrad)"/>
+
+  <!-- Shoulders / Dress -->
+  <path d="M 120,340 C 130,310 160,300 200,300 C 240,300 270,310 280,340 L 310,400 L 90,400 Z" fill="url(#dressGrad)"/>
+  <!-- Dress Neckline & Pendant -->
+  <path d="M 165,300 Q 200,335 235,300" fill="#FFE2D1" stroke="#333" stroke-width="2"/>
+  <circle cx="200" cy="330" r="6" fill="#FFD166" stroke="#333" stroke-width="1.5"/>
+
+  <!-- Neck -->
+  <rect x="180" y="240" width="40" height="70" rx="10" fill="#FFE2D1"/>
+  <!-- Neck Shadow -->
+  <path d="M 180,260 C 190,275 210,275 220,260 L 220,285 C 210,290 190,290 180,285 Z" fill="#FBCDB6"/>
+
+  <!-- Face Head Oval -->
+  <ellipse cx="200" cy="195" rx="72" ry="85" fill="#FFE2D1"/>
+
+  <!-- Cheeks Blush -->
+  <circle cx="155" cy="210" r="14" fill="#FF8FA3" opacity="0.6"/>
+  <circle cx="245" cy="210" r="14" fill="#FF8FA3" opacity="0.6"/>
+
+  <!-- Eyebrows -->
+  <path d="M 148,158 Q 165,150 180,158" stroke="#3D2012" stroke-width="3" stroke-linecap="round" fill="none"/>
+  <path d="M 252,158 Q 235,150 220,158" stroke="#3D2012" stroke-width="3" stroke-linecap="round" fill="none"/>
+
+  <!-- Expressive Friendly Eyes -->
+  <ellipse cx="164" cy="178" rx="11" ry="12" fill="#2E180E"/>
+  <ellipse cx="236" cy="178" rx="11" ry="12" fill="#2E180E"/>
+  <!-- Eye highlights -->
+  <circle cx="160" cy="174" r="4.5" fill="#FFF"/>
+  <circle cx="167" cy="182" r="2" fill="#FFF"/>
+  <circle cx="232" cy="174" r="4.5" fill="#FFF"/>
+  <circle cx="239" cy="182" r="2" fill="#FFF"/>
+  <!-- Eyelashes -->
+  <path d="M 153,170 Q 164,166 175,170 M 174,168 L 179,165" stroke="#2E180E" stroke-width="2" stroke-linecap="round" fill="none"/>
+  <path d="M 247,170 Q 236,166 225,170 M 226,168 L 221,165" stroke="#2E180E" stroke-width="2" stroke-linecap="round" fill="none"/>
+
+  <!-- Cute Nose -->
+  <path d="M 197,192 Q 200,198 203,192" stroke="#E5A88E" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+
+  <!-- Smiling Lips with subtle gloss -->
+  <path d="M 182,218 Q 200,238 218,218 Q 200,224 182,218" fill="#F43F5E"/>
+  <path d="M 188,218 Q 200,223 212,218" stroke="#FFF" stroke-width="1.5" stroke-linecap="round" opacity="0.7"/>
+
+  <!-- Front Hair & Bangs -->
+  <path d="M 128,180 C 125,120 160,85 200,85 C 240,85 275,120 272,180 C 265,150 245,125 200,125 C 155,125 135,150 128,180 Z" fill="url(#hairGrad)"/>
+  <!-- Bang strands -->
+  <path d="M 140,140 Q 170,155 190,135" stroke="#3D2012" stroke-width="4" stroke-linecap="round" fill="none"/>
+  <path d="M 260,140 Q 230,155 210,135" stroke="#3D2012" stroke-width="4" stroke-linecap="round" fill="none"/>
+
+  <!-- Cute Golden Birthday Tiara / Crown -->
+  <g transform="translate(145, 60)">
+    <polygon points="10,40 25,15 55,30 85,15 100,40 10,40" fill="#FFD166" stroke="#B45309" stroke-width="2.5"/>
+    <circle cx="25" cy="15" r="4" fill="#FF7882"/>
+    <circle cx="55" cy="12" r="5" fill="#4EA8DE"/>
+    <circle cx="85" cy="15" r="4" fill="#FF7882"/>
+    <circle cx="55" cy="30" r="3" fill="#FFF"/>
+  </g>
+
+  <!-- Small Cute Floral Earring -->
+  <circle cx="127" cy="205" r="5" fill="#FFD166" stroke="#333" stroke-width="1"/>
+  <circle cx="273" cy="205" r="5" fill="#FFD166" stroke="#333" stroke-width="1"/>
+</svg>

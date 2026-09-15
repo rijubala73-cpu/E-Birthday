@@ -1,0 +1,6 @@
+{
+  "name": "Mehwish Birthday",
+  "description": "A personalized birthday celebration website for Mehwish featuring animated typography, floating balloons, interactive 3D birthday card, and heartfelt wishes.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
