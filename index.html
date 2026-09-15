@@ -1,28 +1,514 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ripa Birthday</title>
-    <meta name="description" content="A personalized birthday celebration website for Ripa featuring animated typography, interactive 3D birthday card, cake cutting celebration, wishlist plans, and heartfelt wishes." />
-    <meta property="og:title" content="Ripa Birthday" />
-    <meta property="og:description" content="A personalized birthday celebration website for Ripa featuring animated typography, interactive 3D birthday card, cake cutting celebration, wishlist plans, and heartfelt wishes." />
-    <meta property="og:type" content="website" />
-    <meta name="twitter:card" content="summary_large_image" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ripa Birthday</title>
+  <meta name="description" content="A personalized birthday celebration website for Ripa featuring animated typography, interactive 3D birthday card, cake cutting celebration, wishlist plans, and heartfelt wishes." />
+  <meta property="og:title" content="Ripa Birthday" />
+  <meta property="og:description" content="A personalized birthday celebration website for Ripa featuring animated typography, interactive 3D birthday card, cake cutting celebration, wishlist plans, and heartfelt wishes." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
 
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Coiny&family=Dancing+Script:wght@500;700&family=Nerko+One&family=Poppins:wght@400;600;700&family=Sriracha&family=Titan+One&display=swap" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Coiny&family=Dancing+Script:wght@500;700&family=Nerko+One&family=Poppins:wght@400;600;700;800&family=Sriracha&family=Titan+One&display=swap" rel="stylesheet">
 
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- Canvas Confetti CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.4/dist/confetti.browser.min.js"></script>
+
+  <!-- Pure CSS3 Stylesheet (No TypeScript/Framework) -->
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+  <!-- ============================================================================== -->
+  <!-- 🎵 AUDIO ELEMENT FOR BACKGROUND MUSIC                                           -->
+  <!-- আপনি script.js এর ২২ নম্বর লাইনে গান বা MP3 ফাইলের নাম দিতে পারেন                  -->
+  <!-- ============================================================================== -->
+  <audio id="birthdayAudio" loop preload="auto"></audio>
+
+  <!-- Floating Audio / Sound Control Button -->
+  <div class="audio-control-container">
+    <button id="musicToggleBtn" class="audio-control-btn" title="Click to play birthday music / melody" aria-label="Toggle Birthday Music">
+      <i class="fa-solid fa-music"></i>
+    </button>
+    <span class="music-tooltip" id="musicTooltip">Music / সুর</span>
+  </div>
+
+  <div id="wrapper">
+    <!-- Top Birthday Flags Decor -->
+    <div class="flag__birthday">
+      <img src="/images/1.png" alt="Birthday Flag" class="flag__left">
+      <img src="/images/1.png" alt="Birthday Flag" class="flag__right">
+    </div>
+
+    <!-- Main Content Row -->
+    <div class="content">
+      <!-- Left Column: Happy Birthday & Date -->
+      <div class="left">
+        <div class="title">
+          <h1 class="happy">
+            <span style="--t: 1s">H</span>
+            <span style="--t: 1.2s">a</span>
+            <span style="--t: 1.4s">p</span>
+            <span style="--t: 1.6s">p</span>
+            <span style="--t: 1.8s">y</span>
+          </h1>
+          <h1 class="birthday">
+            <span style="--t: 2.2s">B</span>
+            <span style="--t: 2.4s">i</span>
+            <span style="--t: 2.6s">r</span>
+            <span style="--t: 2.8s">t</span>
+            <span style="--t: 3.0s">h</span>
+            <span style="--t: 3.2s">d</span>
+            <span style="--t: 3.4s">a</span>
+            <span style="--t: 3.6s">y</span>
+          </h1>
+
+          <div class="hat" id="hatIcon" title="Click party hat!">
+            <img src="/images/hat.png" alt="Party Hat" width="135">
+          </div>
+        </div>
+
+        <!-- Birthday Date: 15 September -->
+        <div class="date__of__birth">
+          <i class="fa-solid fa-star"></i>
+          <span id="typedDate">15 September</span>
+          <i class="fa-solid fa-star"></i>
+        </div>
+
+        <!-- Open Letter Button -->
+        <div class="btn">
+          <button id="btn__letter" aria-label="Open birthday letter for Ripa">
+            <div class="mail">
+              <span>Click Here Ripa</span>
+              <i class="fa-regular fa-envelope"></i>
+            </div>
+          </button>
+        </div>
+      </div>
+
+      <!-- Right Column: Avatar Photo, Dots, & Balloons -->
+      <div class="right">
+        <div class="box__account">
+          <div class="image" id="heroPhotoContainer" title="Click to view next photo">
+            <!-- Main Photo (photo1.jpg) -->
+            <img id="heroPhotoImg" src="photo1.jpg" alt="Ripa Birthday Photo">
+          </div>
+
+          <!-- Photo Dots Switcher -->
+          <div class="photo-indicators">
+            <button class="photo-dot-btn active" data-idx="0"></button>
+            <button class="photo-dot-btn" data-idx="1"></button>
+            <button class="photo-dot-btn" data-idx="2"></button>
+            <button class="photo-dot-btn" data-idx="3"></button>
+            <span class="photo-badge-label" id="photoCounter">1/4</span>
+          </div>
+
+          <div class="name">
+            <i class="fa-solid fa-heart"></i>
+            <span>Dear Ripa</span>
+            <i class="fa-solid fa-heart"></i>
+          </div>
+
+          <div class="balloon_one" id="balloon1" title="Click to pop balloon!">
+            <img width="105px" src="/images/balloon1.png" alt="Pink Balloon">
+          </div>
+          <div class="balloon_two" id="balloon2" title="Click to pop balloon!">
+            <img width="105px" src="/images/balloon2.png" alt="Yellow Balloon">
+          </div>
+        </div>
+
+        <!-- Rotating Circle Badge -->
+        <div class="cricle" id="badgeCircle" title="Happy Birthday Badge">
+          <div class="text__cricle">
+            <span style="--i:1">h</span>
+            <span style="--i:2">a</span>
+            <span style="--i:3">p</span>
+            <span style="--i:4">p</span>
+            <span style="--i:5">y</span>
+            <span style="--i:6">-</span>
+            <span style="--i:7">b</span>
+            <span style="--i:8">i</span>
+            <span style="--i:9">r</span>
+            <span style="--i:10">t</span>
+            <span style="--i:11">h</span>
+            <span style="--i:12">d</span>
+            <span style="--i:13">a</span>
+            <span style="--i:14">y</span>
+            <span style="--i:15">-</span>
+          </div>
+          <i class="fa-solid fa-heart"></i>
+        </div>
+      </div>
+    </div>
+
+    <!-- Decorative Stars & Flowers -->
+    <div class="decorate_star star1" style="--t: 4.5s"></div>
+    <div class="decorate_star star2" style="--t: 4.8s"></div>
+    <div class="decorate_star star3" style="--t: 5.1s"></div>
+    <div class="decorate_star star4" style="--t: 5.4s"></div>
+    <div class="decorate_star star5" style="--t: 5.7s"></div>
+
+    <div class="decorate_flower--one" style="--t: 4.5s">
+      <img width="28" src="/images/decorate_flower.png" alt="Flower">
+    </div>
+    <div class="decorate_flower--two" style="--t: 4.9s">
+      <img width="28" src="/images/decorate_flower.png" alt="Flower">
+    </div>
+    <div class="decorate_flower--three" style="--t: 5.3s">
+      <img width="28" src="/images/decorate_flower.png" alt="Flower">
+    </div>
+
+    <div class="decorate_bottom" id="giftBox">
+      <img src="/images/decorate.png" alt="Gift Decor" width="100">
+    </div>
+
+    <div class="smiley__icon" id="smileIcon">
+      <img src="/images/smiley_icon.png" alt="Smile" width="100">
+    </div>
+
+    <!-- ============================================================================== -->
+    <!-- 3D FOLDING CARD MODAL (WITH EXTRA LARGE WISH FONT)                             -->
+    <!-- ============================================================================== -->
+    <div class="boxMail" id="boxMailModal">
+      <i class="fa-solid fa-xmark close-mail-btn" id="closeMailBtn"></i>
+
+      <!-- Cake Cutting Option Pill directly beside the card -->
+      <div class="cake-modal-top-bar">
+        <button id="btnOpenCakeModal" class="cake-option-pill-btn">
+          <span style="font-size: 1.3rem;">🎂</span>
+          <span>Cake (কেক কাটুন)</span>
+          <i class="fa-solid fa-wand-magic-sparkles" style="color: #ffd166;"></i>
+        </button>
+      </div>
+
+      <div class="boxMail-container" id="cardContainer">
+        <!-- Card 1: Front Cover Flap -->
+        <div class="card1">
+          <div class="userImg">
+            <img id="card1UserImg" src="photo1.jpg" alt="Ripa">
+          </div>
+          <h4 class="username">
+            To: Ripa 💖
+          </h4>
+          <h3>Happy Birthday</h3>
+
+          <div class="imageCute">
+            <div class="card-mini-photo-frame">
+              <img src="/images/photo3.jpg" alt="Ripa Photo">
+            </div>
+          </div>
+
+          <div class="tap-hint">
+            <span id="tapHintText">👈 Hover or Tap to Open</span>
+          </div>
+        </div>
+
+        <!-- Card 2: Inner Heartfelt Note (EXTRA LARGE FONT FOR CLEAR READABILITY) -->
+        <div class="card2">
+          <div class="card2-content">
+            <h3>To You!</h3>
+            <h2 class="wishes-text">
+              Happy Birthday 🥳🎂🥳 Ripa! The day you came into my life I was not
+              really much attached to you, but day by day you became so close to my heart.
+              And now you are truly my dearest younger sister. I wish I could remove all
+              the pain from your life which you are bearing alone. You are always welcome 🤗
+              you can talk anytime you want to talk, especially those thoughts which you can't say
+              to others. May this year all your dreams come true! Wishing you a very Happy Birthday
+              🎈🎂🎈 Ripa. Don't be sad, always be happy and stay blessed! 😌💖
+            </h2>
+
+            <div class="imageCute2">
+              <div class="card-mini-photo-frame">
+                <img src="/images/photo4.jpg" alt="Ripa Photo">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================================================================== -->
+    <!-- INTERACTIVE CAKE & WISHLIST MODAL                                              -->
+    <!-- ============================================================================== -->
+    <div id="cakeFlowModal" class="cake-modal-overlay">
+      <div class="cake-modal-card">
+        <!-- Modal Header -->
+        <div class="cake-modal-header">
+          <div class="cake-modal-header-text">
+            <span style="font-size: 1.6rem;">🎂</span>
+            <div>
+              <h2 id="cakeModalTitle">Happy Birthday Ripa • Cake Time</h2>
+              <p id="cakeModalSubtitle">মমবাতি নিভিয়ে কেক কাটো! 🕯️🔪</p>
+            </div>
+          </div>
+          <button id="closeCakeFlowBtn" class="close-cake-btn">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+
+        <!-- Modal Body -->
+        <div class="cake-modal-body">
+          <!-- Step 1: Cake, Candle, Knife -->
+          <div id="stepCake" class="flow-step">
+            <div class="cake-instruction-pill" id="cakeInstructionPill">
+              👇 মমবাতিতে চাপ দিয়ে ফুঁ দিয়ে নিভিয়ে দাও 🕯️
+            </div>
+
+            <div class="cake-stage" id="cakeStage">
+              <div class="cake-plate"></div>
+              
+              <div class="cake-body" id="cakeBody">
+                <div class="cake-layer-bottom">
+                  <div class="frosting-drips">
+                    <span></span><span></span><span></span><span></span><span></span>
+                  </div>
+                  <span class="decor-fruit">🍓</span>
+                  <span class="decor-fruit">🍒</span>
+                  <span class="decor-fruit">🍓</span>
+                  <span class="decor-fruit">🍒</span>
+                </div>
+
+                <div class="cake-layer-top">
+                  <span class="cake-name-tag">★ Ripa ★</span>
+                </div>
+
+                <div class="cake-cut-line" id="cakeCutLine" style="display: none;"></div>
+
+                <!-- Candle -->
+                <div class="cake-candle" id="cakeCandle" title="মমবাতিতে চাপ দিয়ে নিভিয়ে দাও">
+                  <div id="candleFlame" class="candle-flame">
+                    <div class="flame-glow"></div>
+                    <span class="flame-label">ফুঁ দাও!</span>
+                  </div>
+                  <div id="candleSmoke" class="candle-smoke" style="display: none;">
+                    <span>💨</span>
+                    <span style="font-size: 9px; color: #888;">নিভেছে ✨</span>
+                  </div>
+                  <div class="candle-stick"></div>
+                </div>
+              </div>
+
+              <!-- Knife -->
+              <div class="cake-knife" id="cakeKnife" title="কেক কাটার ছুরি">
+                <div class="knife-blade"><span>STAINLESS</span></div>
+                <div class="knife-handle"><span></span></div>
+              </div>
+            </div>
+
+            <!-- Cake Actions -->
+            <div class="cake-actions">
+              <button id="btnBlowCandle" class="btn-primary-action">
+                <span>🕯️</span> মমবাতি নিভাও
+              </button>
+              <button id="btnCutCake" class="btn-primary-action" style="display: none;">
+                <span>🔪</span> কেক কাটো! (Cut Cake)
+              </button>
+              <button id="btnSurprise" class="btn-surprise-action" style="display: none;">
+                <i class="fa-solid fa-gift"></i>
+                <span>Surprise 🎁 (সারপ্রাইজ)</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Step 2: 5 Wishlist Form -->
+          <div id="stepWishlist" class="flow-step" style="display: none;">
+            <div class="wishlist-header">
+              <div class="gift-round-icon"><i class="fa-solid fa-gift"></i></div>
+              <h3>Ripa's 5 Birthday Wishes 💖</h3>
+              <p>তোমার পছন্দের ৫টি জিনিসের নাম লিখো যা তুমি উপহার হিসেবে পেতে চাও:</p>
+            </div>
+
+            <form id="wishlistForm" class="wishlist-form">
+              <div class="wishlist-row">
+                <label><span class="badge-num">1</span> উপহার ১ (Gift Wish 1):</label>
+                <input type="text" id="wish1" placeholder="যেমন: পছন্দের ড্রেস / জামদানি শাড়ি" required>
+              </div>
+              <div class="wishlist-row">
+                <label><span class="badge-num">2</span> উপহার ২ (Gift Wish 2):</label>
+                <input type="text" id="wish2" placeholder="যেমন: পছন্দের পারফিউম / মেকআপ বক্স">
+              </div>
+              <div class="wishlist-row">
+                <label><span class="badge-num">3</span> উপহার ৩ (Gift Wish 3):</label>
+                <input type="text" id="wish3" placeholder="যেমন: পছন্দের হাতঘড়ি / স্মার্টওয়াচ">
+              </div>
+              <div class="wishlist-row">
+                <label><span class="badge-num">4</span> উপহার ৪ (Gift Wish 4):</label>
+                <input type="text" id="wish4" placeholder="যেমন: পছন্দের বই বা ব্যাগ">
+              </div>
+              <div class="wishlist-row">
+                <label><span class="badge-num">5</span> উপহার ৫ (Gift Wish 5):</label>
+                <input type="text" id="wish5" placeholder="যেমন: স্পেশাল ডিনার / সারপ্রাইজ ট্রিট">
+              </div>
+
+              <div class="form-btn-row">
+                <button type="button" id="btnBackToCake" class="btn-back">← কেক পেইজে ফিরুন</button>
+                <button type="submit" class="btn-submit-wishes">
+                  <i class="fa-solid fa-wand-magic-sparkles"></i>
+                  <span>Submit Wishes (সাবমিট)</span>
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Step 3: 4 Plans Modal ("To get all gifts please unlock the plane.") -->
+          <div id="stepPlans" class="flow-step" style="display: none;">
+            <div class="plans-header">
+              <span class="plans-tag">Special Gift Plans</span>
+              <h3 class="plans-title">To get all gifts please unlock the plane.</h3>
+              <p>নিচের ৪টি প্ল্যানের যেকোনো একটি পছন্দ করে আনলক করুন এবং আপনার পছন্দের সব উপহার নিশ্চিত করুন:</p>
+            </div>
+
+            <div class="plans-grid">
+              <!-- Plan 1000 -->
+              <div class="plan-card" data-plan="Starter Sweet Plan" data-amount="1000">
+                <div class="plan-top"><span class="badge-basic">Basic</span><i class="fa-solid fa-award"></i></div>
+                <h4>Starter Sweet Plan</h4>
+                <div class="plan-price">৳ 1,000 <span>/ এককালীন</span></div>
+                <p>তোমার পছন্দের প্রাথমিক বিশেষ উপহার আনলক হবে</p>
+                <ul>
+                  <li><i class="fa-solid fa-circle-check"></i> পছন্দের ১টি স্পেশাল গিফট</li>
+                  <li><i class="fa-solid fa-circle-check"></i> বার্থডে সারপ্রাইজ কার্ড</li>
+                  <li><i class="fa-solid fa-circle-check"></i> ইনস্ট্যান্ট ডেলিভারি অগ্রাধিকার</li>
+                </ul>
+                <button class="btn-unlock-plan">Unlock This Plan <i class="fa-solid fa-chevron-right"></i></button>
+              </div>
+
+              <!-- Plan 1500 -->
+              <div class="plan-card featured" data-plan="Special Delight Plan" data-amount="1500">
+                <div class="plan-top"><span class="badge-popular">Popular</span><i class="fa-solid fa-award"></i></div>
+                <h4>Special Delight Plan</h4>
+                <div class="plan-price">৳ 1,500 <span>/ এককালীন</span></div>
+                <p>সেরা উপহারের সুন্দর কালেকশন আনলক হবে</p>
+                <ul>
+                  <li><i class="fa-solid fa-circle-check"></i> পছন্দের ২টি মূল গিফট</li>
+                  <li><i class="fa-solid fa-circle-check"></i> হ্যান্ডমেড স্পেশাল নোট</li>
+                  <li><i class="fa-solid fa-circle-check"></i> চকলেট ও বার্থডে ট্রিট বক্স</li>
+                </ul>
+                <button class="btn-unlock-plan">Unlock This Plan <i class="fa-solid fa-chevron-right"></i></button>
+              </div>
+
+              <!-- Plan 3000 -->
+              <div class="plan-card" data-plan="Royal Premium Plan" data-amount="3000">
+                <div class="plan-top"><span class="badge-basic">Royal</span><i class="fa-solid fa-award"></i></div>
+                <h4>Royal Premium Plan</h4>
+                <div class="plan-price">৳ 3,000 <span>/ এককালীন</span></div>
+                <p>রাজকীয় ভালোবাসায় মোড়ানো স্পেশাল উইশ প্যাকেজ</p>
+                <ul>
+                  <li><i class="fa-solid fa-circle-check"></i> পছন্দের ৪টি বড় গিফট</li>
+                  <li><i class="fa-solid fa-circle-check"></i> ভিআইপি গিফট র‍্যাপিং</li>
+                  <li><i class="fa-solid fa-circle-check"></i> স্পেশাল সারপ্রাইজ মেমোরি বক্স</li>
+                </ul>
+                <button class="btn-unlock-plan">Unlock This Plan <i class="fa-solid fa-chevron-right"></i></button>
+              </div>
+
+              <!-- Plan 5000 -->
+              <div class="plan-card featured" data-plan="Ultimate Dream Plan" data-amount="5000">
+                <div class="plan-top"><span class="badge-popular">VIP Ultimate</span><i class="fa-solid fa-award"></i></div>
+                <h4>Ultimate Dream Plan</h4>
+                <div class="plan-price">৳ 5,000 <span>/ এককালীন</span></div>
+                <p>তোমার লিস্টের সবকটি ৫টি স্বপ্নের উপহারই সরাসরি পূরণ হবে!</p>
+                <ul>
+                  <li><i class="fa-solid fa-circle-check"></i> সম্পূর্ণ ৫টি গিফটই কনফার্ম!</li>
+                  <li><i class="fa-solid fa-circle-check"></i> আনলিমিটেড বার্থডে ভালোবাসা</li>
+                  <li><i class="fa-solid fa-circle-check"></i> এক্সক্লুসিভ পার্সোনালাইজড সারপ্রাইজ</li>
+                </ul>
+                <button class="btn-unlock-plan">Unlock This Plan <i class="fa-solid fa-chevron-right"></i></button>
+              </div>
+            </div>
+
+            <div class="plans-footer">
+              <button type="button" id="btnBackToForm" class="btn-back">← উইশলিস্টে ফিরে যান</button>
+              <span>🔒 সুরক্ষিত বিকাশ পেমেন্ট সুবিধা</span>
+            </div>
+          </div>
+
+          <!-- Step 4: bKash Payment -->
+          <div id="stepBkash" class="flow-step" style="display: none;">
+            <div class="bkash-banner">
+              <div class="bkash-tag">bKash Personal Payment</div>
+              <h3>bKash বিকাশ</h3>
+              <p id="bkashPlanInfo">নির্বাচিত প্ল্যান: Special Delight Plan</p>
+              <div class="bkash-price-tag" id="bkashAmountTag">৳ 1,500</div>
+            </div>
+
+            <div class="bkash-number-box">
+              <p>নিচের বিকাশ নম্বরে Send Money করুন:</p>
+              <div class="bkash-row">
+                <span class="bkash-num">01614778155</span>
+                <button id="btnCopyBkash" class="btn-copy">
+                  <i class="fa-regular fa-copy"></i>
+                  <span id="copyBtnText">কপি</span>
+                </button>
+              </div>
+              <small>(Personal Account • সেন্ড মানি করুন)</small>
+            </div>
+
+            <div class="bkash-inputs">
+              <div>
+                <label>যে বিকাশ নম্বর থেকে টাকা পাঠাচ্ছেন (ঐচ্ছিক):</label>
+                <input type="text" id="senderPhone" placeholder="01XXXXXXXXX">
+              </div>
+              <div>
+                <label>bKash TrxID (যদি থাকে):</label>
+                <input type="text" id="trxId" placeholder="e.g. BL92A...">
+              </div>
+            </div>
+
+            <div class="bkash-actions">
+              <button id="btnConfirmPayment" class="btn-confirm-bkash">
+                <i class="fa-solid fa-heart"></i>
+                <span>টাকা পাঠিয়েছি / Confirm Payment 💖</span>
+              </button>
+              <button id="btnBackToPlans" class="btn-back" style="text-align: center; margin-top: 6px;">
+                ← অন্য প্ল্যান পছন্দ করতে ফিরে যান
+              </button>
+            </div>
+          </div>
+
+          <!-- Step 5: Success Celebration -->
+          <div id="stepSuccess" class="flow-step" style="display: none;">
+            <div class="success-box">
+              <div class="success-icon"><i class="fa-solid fa-circle-check"></i></div>
+              <h3>Congratulations Ripa! 🎉</h3>
+              <p class="success-sub">তোমার পছন্দের উপহারের প্ল্যান সফলভাবে আনলক হয়েছে!</p>
+
+              <div class="wishes-summary" id="wishesSummaryBox">
+                <h4>তোমার জমাকৃত উইশলিস্ট:</h4>
+                <ul id="summaryList"></ul>
+              </div>
+
+              <p class="success-note">
+                ধন্যবাদ Ripa! তোমার এই বিশেষ জন্মদিনে তোমার সব স্বপ্ন ও ইচ্ছা পূরণ হোক।
+                খুব শীঘ্রই তোমার সব উপহার তোমার হাতে পৌঁছে যাবে! 🎂✨
+              </p>
+
+              <div class="success-actions">
+                <button id="btnMoreConfetti" class="btn-more-confetti">
+                  <i class="fa-solid fa-wand-magic-sparkles"></i> আরও কনফেটি উড়াও!
+                </button>
+                <button id="btnCloseFlowAll" class="btn-close-all">সমাপ্ত (Close)</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer Attribution -->
+    <footer id="copy">
+      <p>Happy Birthday Ripa • Pure HTML5, CSS3 & JavaScript</p>
+    </footer>
+  </div>
+
+  <!-- Pure Vanilla JavaScript Script (No TypeScript / Framework) -->
+  <script src="/script.js"></script>
+</body>
 </html>
-

@@ -2,5 +2,7 @@
   "name": "Ripa Birthday",
   "description": "A personalized birthday celebration website for Ripa featuring animated typography, interactive 3D birthday card, cake cutting celebration, wishlist plans, and heartfelt wishes.",
   "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
 }
